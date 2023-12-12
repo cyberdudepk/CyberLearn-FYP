@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6cc1728a1c658f62a94cf5cff35a1f28f40932c94623bb0793b283bcf2cd7958
-size 512
+import { Fragment } from "react";
+import Footer from "../component/layout/footer";
+import Header from "../component/layout/header";
+import Banner from "../component/section/banner";
+import Category from "../component/section/category";
+import Courses from "../component/section/course";
+
+
+
+const Home = () => {
+    return (
+        <Fragment>
+            <Header />
+            <Banner />
+            <Category />
+            <Courses />
+            <Footer />
+        </Fragment>
+    );
+}
+ 
+export default Home;

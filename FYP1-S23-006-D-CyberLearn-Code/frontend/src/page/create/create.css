@@ -1,3 +1,128 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6c70a1db187051d8306b8c5fb74668b47105fbae77d652c5e8ead717e2ac7271
-size 2112
+.account-wrapper1,
+.section-wrapper1 {
+    box-shadow: 0px 0px 10px 0px rgba(136, 136, 136, .1);
+    padding: 60px 80px;
+    max-width: 1250px;
+    margin: 0 auto;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-style: normal;
+    background-color: #fff;
+    text-align: left;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.section-wrapper1 {
+    /* max-width: 1000px; */
+    /* background-color: #F9E8B0; */
+    border: 1px solid #26C976;
+    padding: 20px 20px;
+}
+
+
+.section-wrapper2 {
+    background-color: #FFF9F1;
+    box-shadow: 5px 5px rgba(136, 136, 136, .1);
+    
+    padding: 10px 10px;
+    max-width: 1250px;
+    margin: 15px 5px;
+}
+
+.top-wrapper1 {
+    box-shadow: 0px 0px 10px 0px rgba(136, 136, 136, .1);
+    padding: 10px 10px;
+    max-width: 1250px;
+    margin: 0 auto;
+    font-style: normal;
+    text-align: center;
+    text-transform: capitalize;
+    background-color: #26C976;
+
+
+}
+
+
+  .quill-editor .ql-video, .quill-editor .ql-image {
+    max-width: 100%;
+    height: auto;
+  }
+
+
+.my-file-upload{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.my-form {
+    border: 1px solid #1c1d1f;
+
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+}
+
+.lecture-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.lecture-wrapper .button-group {
+  visibility: hidden;
+}
+
+.lecture-wrapper:hover .button-group {
+  visibility: visible;
+}
+
+
+.lecture-wrapper {
+    margin: 20px 20px;
+    background-color: #E9E9ED;
+    /* border: #000 1px solid; */    
+    padding: 5px 10px;
+}
+
+
+.button-group {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.button-group button {
+    margin-left: 10px;
+}
+
+.lect-button {
+    margin: 5px 20px;
+    height: 50px;
+}
+
+
+
+@media(max-width: 767px) {
+
+    .account-wrapper1,
+    .top-wrapper1,
+    .section-wrapper1,
+    .section-wrapper2 {
+        padding: 50px 40px
+    }
+}
+
+@media screen and (max-width: 499px) {
+
+    .account-wrapper1,
+    .top-wrapper1,
+    .section-wrapper1,
+    .section-wrapper2 {
+        padding: 40px 15px
+    }
+}

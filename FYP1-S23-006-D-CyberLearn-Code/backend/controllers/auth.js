@@ -1,3 +1,17 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:dc11b3d3a9df8efe87bd57912e234bab7b4e5242e7249e810ddbfc363394c568
-size 502
+const jwt = require('jsonwebtoken');
+
+const authMiddleware = (req, res, next) => {
+  try {
+    // Extract token from request headers
+    const token = req.headers.authorization.split(' ')[1];
+
+    // Verify token and decode payload
+    const decodedToken = jwt.verify(token, 'secret');
+    req.userData = { email: decodedToken.email, userId: decodedToken.userId };
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Authentication failed' });
+  }
+};
+
+module.exports = authMiddleware;

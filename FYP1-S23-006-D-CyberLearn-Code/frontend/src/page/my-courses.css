@@ -1,3 +1,45 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:484295c8fe7cbee81e27a71b44429f27fa39ec904f86dae812dfdb8f83662d01
-size 741
+.my-blur {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .my-blur:hover .course-item {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+  }
+
+
+  
+  .course-links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all 0.2s ease;
+    z-index: 2;
+  }
+  
+  .my-blur:hover .course-links {
+    
+    opacity: 1;
+
+  }
+  
+  .course-links a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px 20px;
+    background-color: #42B974;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .course-links a:hover {
+    background-color: #FFF9F1;
+  }
+  

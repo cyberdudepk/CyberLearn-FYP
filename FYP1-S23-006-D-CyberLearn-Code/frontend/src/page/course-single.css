@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8f90e6c506dfc558cf92783213d2a387660f493855cb86ef13bc6cba84636ac7
-size 88
+.pageheader-thumb img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+  }
+

@@ -1,3 +1,32 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:68f9eb9ec61de5eafcb2c7f3675752fe403b490e53527598db50cab347f983b1
-size 487
+import { Schema, model } from 'mongoose';
+
+const userSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  enrolled_courses: [
+    {
+      type: Schema.Types.ObjectId,
+      default: [],
+    }
+  ]
+});
+
+const User = model('User', userSchema);
+
+export default User;

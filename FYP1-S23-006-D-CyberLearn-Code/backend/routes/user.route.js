@@ -1,3 +1,10 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:71cad6667b3229cb0b668726d56c8ce44a38cbb82d2e45d08068913dd097c6c9
-size 365
+import { Router } from 'express';
+const router = Router();
+import userRoutes from '../controllers/user.js';
+
+router.post('/signup', userRoutes.signup);
+router.post('/login', userRoutes.login);
+router.post('/enroll', userRoutes.enroll)
+router.post('/connectvm', userRoutes.ConnectWindows)
+router.post('/connectkalivm', userRoutes.ConnectKali)
+export default router;

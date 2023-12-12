@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b66b4b4fefb946eb326175f111b8c2c66446062f0f05d09d1e754b5a37a19774
-size 591
+
+
+
+const Pagination = () => {
+    return (
+        <ul className="default-pagination lab-ul">
+            <li>
+                <a href="#"><i className="icofont-rounded-left"></i></a>
+            </li>
+            <li>
+                <a href="#">01</a>
+            </li>
+            <li>
+                <a href="#" className="active">02</a>
+            </li>
+            <li>
+                <a href="#">03</a>
+            </li>
+            <li>
+                <a href="#"><i className="icofont-rounded-right"></i></a>
+            </li>
+        </ul>
+    );
+}
+ 
+export default Pagination;

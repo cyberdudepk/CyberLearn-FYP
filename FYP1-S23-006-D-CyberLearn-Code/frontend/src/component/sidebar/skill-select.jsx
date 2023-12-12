@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:54bc274e7681fc8855c8a4766420dc2cbf63604fbac0be156af1df5047db32cd
-size 647
+
+
+
+
+const SkillSelect = ({select}) => {
+    return (
+        <select defaultValue={select}>
+            <option value="all">All Skills</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="php">PHP</option>
+            <option value="java">JAVA</option>
+            <option value="javascript">JAVASCRIPT</option>
+            <option value="wordpress">WORDPRESS</option>
+            <option value="react">REACT</option>
+            <option value="vue">VUE</option>
+            <option value="angular">ANGULAR</option>
+        </select>
+    );
+}
+ 
+export default SkillSelect;
