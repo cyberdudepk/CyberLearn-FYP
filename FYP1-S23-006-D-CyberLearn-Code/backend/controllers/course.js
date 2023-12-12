@@ -434,4 +434,18 @@ router.post("/save-lecture", async (req, res) => {
   }
 });
 
+
+router.get("/course-content/:id", async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+    res.status(200).json(course); // This returns the full course object including all sections and lectures
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to retrieve course content" });
+  }
+});
+
 export default router;
