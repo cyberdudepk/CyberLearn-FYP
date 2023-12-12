@@ -2,9 +2,7 @@ import { Component, Fragment, useState, useEffect } from "react";
 import Footer from "../component/layout/footer";
 import Comment from "../component/sidebar/comment";
 import Rating from "../component/sidebar/rating";
-// import Author from "../component/sidebar/author";
 import { Link, useParams } from "react-router-dom";
-// import Respond from "../component/sidebar/respond";
 import axios from "axios";
 import "./course-single.css";
 import Header from "../component/layout/header";
@@ -13,10 +11,20 @@ import Swal from "sweetalert2";
 const CourseSingle = () => {
   const { id } = useParams();
   const [course, setCourse] = useState({});
-  const [comment, setComment] = useState(""); // State to hold the comment text
-  const [comments, setComments] = useState([]); // State to hold the list of comments
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
 
-  
+  // Function to check if user is already enrolled
+  const checkEnrollment = async () => {
+    const username = localStorage.getItem("username");
+    try {
+      const response = await axios.get(`http://localhost:4000/users/isEnrolled?username=${username}&course_id=${id}`);
+      setIsEnrolled(response.data.isEnrolled);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,10 +33,11 @@ const CourseSingle = () => {
         setCourse(response.data);
         console.log(response.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchData();
+    checkEnrollment(); // Call the checkEnrollment function on component mount
   }, [id]);
 
   const price = "Free";
@@ -57,7 +66,7 @@ const CourseSingle = () => {
     },
   ];
 
-  const handleEnroll = async (id) => {
+  const handleEnroll = async () => {
     const username = localStorage.getItem("username");
 
     try {
@@ -73,8 +82,11 @@ const CourseSingle = () => {
           icon: "success",
           confirmButtonColor: "#3085d6",
           confirmButtonText: "OK",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
         });
-
       }
     } catch (error) {
       console.error(error);
@@ -95,19 +107,22 @@ const CourseSingle = () => {
       comment: comment,
       courseId: id,
     };
-  
+
     try {
-      const response = await axios.post('http://localhost:5000/process_comment', commentData);
-  
+      const response = await axios.post(
+        "http://localhost:5000/process_comment",
+        commentData
+      );
+
       if (response.data && response.data.rating !== undefined) {
         const rating = response.data.rating;
-        console.log('Rating:', rating);
-  
+        console.log("Rating:", rating);
+
         // Update your comments state appropriately
         // For example, if you want to add the new comment to the list
         setComments([...comments, { comment: comment, rating: rating }]);
         setComment("");
-  
+
         Swal.fire({
           title: "Success!",
           text: `Your comment has been submitted with a rating of ${rating}.`,
@@ -137,7 +152,6 @@ const CourseSingle = () => {
     }
   };
 
-
   return (
     <Fragment>
       <Header />
@@ -158,12 +172,15 @@ const CourseSingle = () => {
                 <h2 className="phs-title">{course.name}</h2>
 
                 <div className="course-enroll">
-                  <button
-                    onClick={() => handleEnroll(course._id)}
-                    className="lab-btn"
-                  >
-                    <span>Enroll Now</span>
-                  </button>
+                  {isEnrolled ? (
+                    <button className="lab-btn">
+                      <span>Open In Academy</span>
+                    </button>
+                  ) : (
+                    <button onClick={() => handleEnroll()} className="lab-btn">
+                      <span>Enroll Now</span>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -227,7 +244,6 @@ const CourseSingle = () => {
                                       <div className="video-item-title">
                                         {lecture.title}
                                       </div>
-
                                     </li>
                                   ))}
                                 </ul>
@@ -241,7 +257,6 @@ const CourseSingle = () => {
                 </div>
 
                 {/* <Respond /> */}
-                
               </div>
             </div>
             <div className="col-lg-4">
@@ -274,12 +289,12 @@ const CourseSingle = () => {
         </div>
       </div>
 
-            {/* Your existing JSX */}
+      {/* Your existing JSX */}
 
-            <Comment />
-      
+      <Comment />
+
       {/* Comment box */}
-     { /* <div className="comment-box">
+      {/* <div className="comment-box">
         <h4>Add a Comment</h4>
         <textarea
           value={comment}
@@ -300,14 +315,9 @@ const CourseSingle = () => {
         </ul>
       </div> */}
 
-
-
-
       <Footer />
     </Fragment>
   );
 };
-
-
 
 export default CourseSingle;

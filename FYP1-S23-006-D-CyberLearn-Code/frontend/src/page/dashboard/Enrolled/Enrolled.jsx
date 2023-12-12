@@ -3,24 +3,36 @@ import { Link } from "react-router-dom";
 
 import "./Enrolled.css"
 
-const MyCoursePage = () => {
+const Enrolled = () => {
     const [courseList, setCourseList] = useState([]);
 
+
     useEffect(() => {
-        async function fetchCourses() {
+        async function fetchEnrolledCourses() {
             const username = localStorage.getItem("username");
             if (!username) {
-                console.log("No username")
+                console.log("No username found");
                 return;
             }
-            const response = await fetch(`http://localhost:4000/courses/my-courses/${username}`);
-            const data = await response.json();
-            console.log(data)
-            setCourseList(data);
+            
+            try {
+                const response = await fetch(`http://localhost:4000/users/getEnrolledCourses?username=${username}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                console.log(data);
+                setCourseList(data); // Directly set the data received from backend
+            } catch (error) {
+                console.error("Error fetching enrolled courses: ", error);
+                // Handle errors here, like showing a notification to the user
+            }
         }
-        fetchCourses();
+        
+        fetchEnrolledCourses();
     }, []);
-
+    
+    
 
     const handleDelete = async (id) => {
 
@@ -86,5 +98,5 @@ const MyCoursePage = () => {
     );
 }
 
-export default MyCoursePage;
+export default Enrolled;
 
