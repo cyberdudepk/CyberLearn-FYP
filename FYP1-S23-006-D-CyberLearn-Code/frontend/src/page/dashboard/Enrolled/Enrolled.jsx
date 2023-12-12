@@ -1,11 +1,11 @@
 import { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import CourseContent from '../CourseMaterial/CourseMaterial';
 
 import "./Enrolled.css"
 
-const Enrolled = () => {
+const Enrolled = ({ onSelectCourse }) => {
     const [courseList, setCourseList] = useState([]);
-
 
     useEffect(() => {
         async function fetchEnrolledCourses() {
@@ -21,22 +21,21 @@ const Enrolled = () => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data);
-                setCourseList(data); // Directly set the data received from backend
+                setCourseList(data);
             } catch (error) {
                 console.error("Error fetching enrolled courses: ", error);
-                // Handle errors here, like showing a notification to the user
             }
         }
         
         fetchEnrolledCourses();
     }, []);
-    
-    
+
 
     const handleDelete = async (id) => {
+        // Delete logic here
+    };
 
-      }
+
 
     const subTitle = "Enrolled Courses";
     const title = "Start Where You Left Off!";
@@ -82,7 +81,7 @@ const Enrolled = () => {
                                             </div>
                                         </div>
                                         <div className="course-links">
-                                            <Link to={`#`}>Edit</Link>
+                                        <Link to="#">Edit</Link>
                                             <Link to="" onClick={() => handleDelete(val._id)}>Delete</Link>
                                         </div>
                                     </div>
