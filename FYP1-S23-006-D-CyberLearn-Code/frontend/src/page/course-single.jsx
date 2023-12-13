@@ -291,10 +291,8 @@ const CourseSingle = () => {
 
       {/* Your existing JSX */}
 
-      <Comment />
-
       {/* Comment box */}
-      {/* <div className="comment-box">
+      <div className="comment-box">
         <h4>Add a Comment</h4>
         <textarea
           value={comment}
@@ -305,7 +303,7 @@ const CourseSingle = () => {
         ></textarea>
         <button onClick={handleSubmitComment}>Submit Comment</button>
       </div>
-      {/* Display existing comments 
+      {/* Display existing comments */}
       <div className="existing-comments">
         <h4>Comments</h4>
         <ul>
@@ -313,7 +311,10 @@ const CourseSingle = () => {
             <li key={index}>{c.comment}</li>
           ))}
         </ul>
-      </div> */}
+      </div> 
+
+
+    <Comment />
 
       <Footer />
     </Fragment>
