@@ -19,7 +19,7 @@ const DashboardWithSidebar = () => {
           `http://localhost:4000/courses/course-content/${courseId}`
         );
         const course = await response.json();
-        console.log(course.name)
+        console.log(course.name);
         if (course && course.sections) {
           setSections(course.sections);
           setSelectedSection(course.sections[0]); // Set the first section as active by default
@@ -33,53 +33,75 @@ const DashboardWithSidebar = () => {
     fetchCourseContent();
   }, [courseId]);
 
+  const [expandedLectures, setExpandedLectures] = useState({});
+
+  
+
+  const toggleLecture = (index) => {
+    setExpandedLectures(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   return (
     <Fragment>
-      <div style={{ display: "flex" }}>
-        <div className="sidebar">
-          <div className="sidebar-logo">
-            {/* Assuming you have a logo image, adjust the path as necessary */}
-            <img
-              src="http://localhost:3000/assets/images/logo/green.png"
-              alt="Logo"
-              className="logo-image"
-            />
+      <div style={{ backgroundColor: "#FFF9F1" }}>
+        <div style={{ display: "flex" }}>
+          <div className="sidebar">
+            <div className="sidebar-logo">
+              {/* Assuming you have a logo image, adjust the path as necessary */}
+              <img
+                src="http://localhost:3000/assets/images/logo/green.png"
+                alt="Logo"
+                className="logo-image"
+              />
+            </div>
+
+            <div className="course-title">
+              <h2>{courseTitle}</h2>
+            </div>
+
+            {/* Sidebar menu items */}
+            {sections.map((section, index) => (
+              <div
+                key={index}
+                className={`menu-item ${
+                  selectedSection === section ? "active" : ""
+                }`}
+                onClick={() => setSelectedSection(section)}
+              >
+                {section.title}
+              </div>
+            ))}
           </div>
 
-          <div className="course-title">
-            <h2>{courseTitle}</h2>
+          <div style={{ marginLeft: "30%", width: "70%" }}>
+            {selectedSection && (
+              <div className="main-div">
+                <h2>{selectedSection.title}</h2>
+                {selectedSection.lectures.map((lecture, index) => (
+                  <div key={index}>
+                    <div className="main-heading">
+                      <p onClick={() => toggleLecture(index)}>
+                        {expandedLectures[index] ? "➖" : "➕"}
+                      </p>
+                      <h3>{lecture.title}</h3>
+                    </div>
+                    {expandedLectures[index] && (
+                      <div
+                        className="answers"
+                        dangerouslySetInnerHTML={{ __html: lecture.content }}
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-
-          {/* Sidebar menu items */}
-          {sections.map((section, index) => (
-            <div
-              key={index}
-              className={`menu-item ${
-                selectedSection === section ? "active" : ""
-              }`}
-              onClick={() => setSelectedSection(section)}
-            >
-              {section.title}
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginLeft: "30%", width: "70%" }}>
-          {/* Content of the selected section */}
-          {selectedSection && (
-            <div>
-              <h2>{selectedSection.title}</h2>
-              {selectedSection.lectures.map((lecture, index) => (
-                <div key={index}>
-                  <h3>{lecture.title}</h3>
-                  {/* Render HTML content safely */}
-                  <div dangerouslySetInnerHTML={{ __html: lecture.content }} />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
+
       {/* <Footer /> */}
     </Fragment>
   );
