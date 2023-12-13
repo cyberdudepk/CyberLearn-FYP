@@ -5,7 +5,7 @@ import Footer from "../../component/layout/footer";
 import Sidebar from './Sidebar/Sidebar';
 
 import YourComponent2 from './Enrolled/Enrolled';
-import YourComponent1 from '../../component/sidebar/author';
+import YourComponent1 from './Recommend/recommended';
 import YourComponent3 from '../../component/sidebar/author';
 import YourComponent4 from '../../component/sidebar/author';
 
