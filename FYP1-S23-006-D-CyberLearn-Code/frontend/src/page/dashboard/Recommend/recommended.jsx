@@ -33,6 +33,8 @@ const Enrolled = ({ onSelectCourse }) => {
                 }
                 const data = await response.json();
 
+                console.log(data)
+
                 const matchedCourses = data.filter(course => 
                     course.tags.some(tag => interestData.tags.includes(tag)));
 
@@ -42,7 +44,7 @@ const Enrolled = ({ onSelectCourse }) => {
 
 
 
-                setCourseList(matchedCourses);  
+                setCourseList(data);  
 
             } catch (error) {
                 console.error("Error fetching enrolled courses: ", error);
