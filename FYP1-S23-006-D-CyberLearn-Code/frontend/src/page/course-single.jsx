@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Footer from "../component/layout/footer";
 import CommentComponent from "../component/sidebar/CommentComponent";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./course-single.css";
 import Header from "../component/layout/header";

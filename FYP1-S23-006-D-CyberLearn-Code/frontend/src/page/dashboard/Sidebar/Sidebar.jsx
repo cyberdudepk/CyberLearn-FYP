@@ -15,30 +15,30 @@ const Sidebar = ({ onMenuItemClick, activeComponent }) => {
   const username = localStorage.getItem("username");
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-logo">
+    <div className="academy-sidebar">
+      <div className="academy-sidebar-logo">
         <Link to="/">
           <img
             src="http://localhost:3000/assets/images/logo/green.png"
             alt="Website Logo"
-            className="website-logo"
+            className="academy-website-logo"
           />
         </Link>
       </div>
 
-      <div className="sidebar-header">
+      <div className="academy-sidebar-header">
         <img
           src="../assets/images/author/01.jpg"
           alt="User Avatar"
-          className="user-avatar"
+          className="academy-user-avatar"
         />
-        <div className="user-name">Hello {username}!</div>
+        <div className="academy-user-name">Hello {username}!</div>
       </div>
       {menuItems.map((item) => (
         <div
           key={item.componentKey}
-          className={`menu-item ${
-            activeComponent === item.componentKey ? "active" : ""
+          className={`academy-menu-item ${
+            activeComponent === item.componentKey ? "academy-active" : ""
           }`}
           onClick={() => onMenuItemClick(item.componentKey)}
         >

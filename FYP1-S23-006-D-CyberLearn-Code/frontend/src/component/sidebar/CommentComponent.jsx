@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from './Rating'; // Ensure this import is correct
+import Rating from './rating'; // Ensure this import is correct
 
 const CommentComponent = ({ comments }) => {
   // Debugging: Log the comments to see if they are being passed correctly
