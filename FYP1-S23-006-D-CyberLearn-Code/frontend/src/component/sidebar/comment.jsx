@@ -1,7 +1,7 @@
 
 import Rating from "./rating";
 
-const title = "02 Comment";
+const title = "Comment";
 
 
 const commentList = [
