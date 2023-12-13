@@ -12,13 +12,13 @@ export const addUserInterest = async (req, res) => {
   }
 };
 
-// Add user interest
 export const getUserInterest = async (req, res) => {
   try {
     const { username } = req.body;
-    // Assuming UserInterest.find is an async operation
-    const userInterest = await UserInterest.find(username);
-    
+
+    // Use findOne to get a single document that matches the username
+    const userInterest = await UserInterest.findOne({ username: username });
+
     // Check if userInterest was found
     if (userInterest) {
       res.status(200).json(userInterest);
