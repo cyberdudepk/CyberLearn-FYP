@@ -4,26 +4,45 @@ import { Link } from "react-router-dom";
 
 import "./recommended.css"
 
+
+
+
 const Enrolled = ({ onSelectCourse }) => {
     const [courseList, setCourseList] = useState([]);
+    const [userTags, setUserTags] = useState([]);
+    const [filteredCourses, setFilteredCourses] = useState([]);
 
     useEffect(() => {
         async function fetchEnrolledCourses() {
-            const username = localStorage.getItem("username");3
+            const username = localStorage.getItem("username");
             if (!username) {
                 console.log("No username found");
                 return;
             }
             
             try {
+
+                const interestResponse = await fetch(`http://localhost:4000/api/user-interests/${username}`);
+                const interestData = await interestResponse.json();
+                setUserTags(interestData.tags);
+
                 const response = await fetch('http://localhost:4000/courses/recommended');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data)
-                setCourseList(data);
-                console.log(data.tags)
+
+                const matchedCourses = data.filter(course => 
+                    course.tags.some(tag => interestData.tags.includes(tag)));
+
+                    console.log(matchedCourses);
+
+
+
+
+
+                setCourseList(matchedCourses);  
+
             } catch (error) {
                 console.error("Error fetching enrolled courses: ", error);
             }
