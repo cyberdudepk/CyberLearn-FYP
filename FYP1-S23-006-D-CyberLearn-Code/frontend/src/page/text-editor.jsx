@@ -1,14 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Footer from "../component/layout/footer";
 import Header from "../component/layout/header";
-import ReactQuill from 'react-quill';
-import axios from 'axios';
+import ReactQuill from "react-quill";
+import axios from "axios";
 import Swal from "sweetalert2";
 
-import './create/create.css'
+import "./create/create.css";
 
 const TextEditor = () => {
-
   const lecTitle = localStorage.getItem("lectureTitle");
 
   const handleCloseButton = () => {
@@ -26,17 +25,18 @@ const TextEditor = () => {
 
   const [text, setText] = useState("");
 
-  const toolbarOptions = [    ['bold', 'italic', 'underline', 'strike'],
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-    [{ 'font': [] }],
-    [{ 'color': [] }, { 'background': [] }],
-    [{ 'align': [] }],
-    [{ 'script': 'sub' }, { 'script': 'super' }],
-    [{ 'indent': '-1' }, { 'indent': '+1' }],
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
-    ['blockquote', 'code-block'],
-    ['link', 'image', 'video'],
-    ['clean']
+  const toolbarOptions = [
+    ["bold", "italic", "underline", "strike"],
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+    [{ font: [] }],
+    [{ color: [] }, { background: [] }],
+    [{ align: [] }],
+    [{ script: "sub" }, { script: "super" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    [{ list: "ordered" }, { list: "bullet" }, { list: "check" }],
+    ["blockquote", "code-block"],
+    ["link", "image", "video"],
+    ["clean"],
   ];
 
   const handleTextChange = (value) => {
@@ -52,18 +52,17 @@ const TextEditor = () => {
     setText(newText);
   };
 
-
   const handleSaveButton = async () => {
     const sectionIndex = localStorage.getItem("sectionIndex");
     const lectureIndex = localStorage.getItem("lectureIndex");
-    
+
     try {
-      await axios.post('http://localhost:4000/courses/save-lecture', {
+      await axios.post("http://localhost:4000/courses/save-lecture", {
         sectionIndex: sectionIndex,
         lectureIndex: lectureIndex,
-        content: text
+        content: text,
       });
-      
+
       // Show success message to user
       Swal.fire({
         title: "Success!",
@@ -86,25 +85,24 @@ const TextEditor = () => {
     }
   };
 
-
   useEffect(() => {
     const getLectureContent = async () => {
       try {
         const sectionIndex = localStorage.getItem("sectionIndex");
         const lectureIndex = localStorage.getItem("lectureIndex");
-        const response = await fetch(`http://localhost:4000/courses/load-lecture?sectionIndex=${sectionIndex}&lectureIndex=${lectureIndex}`);
+        const response = await fetch(
+          `http://localhost:4000/courses/load-lecture?sectionIndex=${sectionIndex}&lectureIndex=${lectureIndex}`
+        );
         const { content } = await response.json();
         setText(content);
       } catch (error) {
         console.error(error);
       }
     };
-  
+
     getLectureContent();
   }, []);
-  
-  
-  
+
   const subTitle = "Lecture Content Editor";
   const title = "Fine-Tune Your Lecture Content";
   return (
@@ -118,7 +116,9 @@ const TextEditor = () => {
           </div>
 
           <div className="top-wrapper1">
-            <h4 className="title" style={{ color: "white" }}>{lecTitle}</h4>
+            <h4 className="title" style={{ color: "white" }}>
+              {lecTitle}
+            </h4>
           </div>
           <div className="account-wrapper1">
             <div className="lecture-title-row">
@@ -131,7 +131,6 @@ const TextEditor = () => {
                   className="btn btn-secondary"
                   onClick={() => {
                     handleSaveButton();
- 
                   }}
                 >
                   Save
@@ -142,7 +141,6 @@ const TextEditor = () => {
                   onClick={() => {
                     handleCloseButton();
                     window.close();
-
                   }}
                 >
                   Close
@@ -157,15 +155,15 @@ const TextEditor = () => {
               modules={{
                 toolbar: toolbarOptions,
               }}
-              style={{ minHeight: '400px', overflowY: 'auto' }}
+              style={{ minHeight: "400px", overflowY: "auto" }}
             />
-
           </div>
+
+          
         </div>
       </div>
       <Footer />
     </Fragment>
-
   );
 };
 
