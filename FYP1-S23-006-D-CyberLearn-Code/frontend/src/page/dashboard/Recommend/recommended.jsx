@@ -74,7 +74,7 @@ const Enrolled = ({ onSelectCourse }) => {
                                                     </div>
                                                     <Link to=""><h4>{val.name}</h4></Link>
                                                     <div className="course-details">
-                                                        <div className="couse-count"><i className="icofont-video-alt"></i> {val.lecturesCount}x lectures</div>
+                                                        <div className="couse-count"><i className="icofont-video-alt"></i> {val.totalLectures}x lectures</div>
                                                         <div className="couse-topic"><i className="icofont-signal"></i> {val.level}</div>
                                                     </div>
 

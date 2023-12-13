@@ -139,11 +139,26 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get('/recommended', async (req, res) => {
+router.get("/recommended", async (req, res) => {
   try {
-    const courses = await Course.find({});
-    const coursesWithLectureCount = courses.map(course => {
-      const totalLectures = course.sections.reduce((total, section) => total + section.lectures.length, 0);
+    const courses = await Course.find(
+      {},
+      {
+        _id: 1,
+        name: 1,
+        image: 1,
+        category: 1,
+        instructor: 1,
+        level: 1,
+        tags: 1,
+        "sections.lectures": 1,
+      }
+    );
+    const formattedCourses = courses.map((course) => {
+      const totalLectures = course.sections.reduce(
+        (acc, section) => acc + section.lectures.length,
+        0
+      );
       return {
         _id: course._id,
         name: course.name,
@@ -152,12 +167,15 @@ router.get('/recommended', async (req, res) => {
         tags: course.tags,
         instructor: course.instructor,
         level: course.level,
-        totalLectures: totalLectures
+        totalLectures: totalLectures,
       };
     });
-    res.json(coursesWithLectureCount);
+    res.status(200).json(formattedCourses);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.log(error);
+    res.status(500).json({
+      message: "Failed to retrieve courses",
+    });
   }
 });
 
