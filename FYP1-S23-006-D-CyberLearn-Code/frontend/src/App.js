@@ -17,6 +17,7 @@ import EditCourse from "./page/create/edit"
 import SearchPage from "./page/search";
 import Dashboard from "./page/dashboard/dashboard";
 import CourseMaterial from "./page/Classroom/CourseMaterial";
+import InitialQuiz from "./page/InitialQuiz";
 
 function App() {
   const isAuthenticated = !!localStorage.getItem("token") && !!localStorage.getItem("username");
@@ -34,6 +35,7 @@ function App() {
         <Route path="/edit/:id" element={isAuthenticated ? <EditCourse /> : <LoginPage />} />
         <Route path="/classroom/:id" element={isAuthenticated ? <CourseMaterial /> : <LoginPage />} />
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <LoginPage />} />
+        <Route path="/Survey" element={isAuthenticated ? <InitialQuiz /> : <LoginPage />} />
         <Route path="/my-courses" element={isAuthenticated ? <MyCoursesList /> : <LoginPage />} />
         <Route path="/create" element={isAuthenticated ? <CreateCourse /> : <LoginPage />} />
         <Route path="/edit-lecture" target="_blank" element={isAuthenticated ? <TextEditor /> : <LoginPage />} />

@@ -53,7 +53,7 @@ const SignupPage = () => {
                 setMessage("Signup successful");
                 setMessageType("success");
                 setTimeout(() => {
-                    navigate("/course");
+                    navigate("/Survey");
                     window.location.reload();
                 }, 1000);
 
