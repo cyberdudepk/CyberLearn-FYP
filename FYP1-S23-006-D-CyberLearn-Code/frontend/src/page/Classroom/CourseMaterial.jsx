@@ -2,24 +2,22 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import Footer from "../../component/layout/footer";
-import "./CourseMaterial.css"
+import "./CourseMaterial.css";
 // Import other necessary components or assets
 
 const DashboardWithSidebar = () => {
-    const [sections, setSections] = useState([]);
-    const [selectedSection, setSelectedSection] = useState(null);
-    const [courseTitle, setCourseTitle] = useState("");
-  
-    const { id: courseId } = useParams();
-  
+  const [sections, setSections] = useState([]);
+  const [selectedSection, setSelectedSection] = useState(null);
+  const [courseTitle, setCourseTitle] = useState("");
 
- 
-
+  const { id: courseId } = useParams();
 
   useEffect(() => {
     const fetchCourseContent = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/courses/course-content/${courseId}`);
+        const response = await fetch(
+          `http://localhost:4000/courses/course-content/${courseId}`
+        );
         const course = await response.json();
         if (course && course.sections) {
           setSections(course.sections);
@@ -34,9 +32,8 @@ const DashboardWithSidebar = () => {
     fetchCourseContent();
   }, [courseId]);
 
-
   return (
-<Fragment>
+    <Fragment>
       <div style={{ display: "flex" }}>
         <div className="sidebar">
           <div className="sidebar-logo">
@@ -74,7 +71,8 @@ const DashboardWithSidebar = () => {
               {selectedSection.lectures.map((lecture, index) => (
                 <div key={index}>
                   <h3>{lecture.title}</h3>
-                  <p>{lecture.content}</p>
+                  {/* Render HTML content safely */}
+                  <div dangerouslySetInnerHTML={{ __html: lecture.content }} />
                 </div>
               ))}
             </div>
