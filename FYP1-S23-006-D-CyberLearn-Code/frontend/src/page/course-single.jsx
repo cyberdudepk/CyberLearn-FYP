@@ -1,8 +1,7 @@
-import { Component, Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Footer from "../component/layout/footer";
-import Comment from "../component/sidebar/comment";
-import Rating from "../component/sidebar/rating";
-import { Link, useParams } from "react-router-dom";
+import CommentComponent from "../component/sidebar/CommentComponent";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./course-single.css";
 import Header from "../component/layout/header";
@@ -12,7 +11,7 @@ const CourseSingle = () => {
   const { id } = useParams();
   const [course, setCourse] = useState({});
   const [isEnrolled, setIsEnrolled] = useState(false);
-  const [comment, setComment] = useState("");
+  const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
 
   // Function to check if user is already enrolled
@@ -120,7 +119,7 @@ const CourseSingle = () => {
     const username = localStorage.getItem("username"); // Replace with dynamic username retrieval logic
     const commentData = {
       username,
-      comment,
+      comment: commentText,
       courseId: id,
     };
 
@@ -142,7 +141,7 @@ const CourseSingle = () => {
 
         // Update your comments state appropriately
         setComments([...comments, backendResponse.data]);
-        setComment("");
+        setCommentText("");
 
         Swal.fire({
           title: "Success!",
@@ -182,8 +181,8 @@ const CourseSingle = () => {
             <div className="col-lg-7 col-12">
               <div className="pageheader-thumb">
                 <img
-                  src={`http://localhost:4000/${course.image}`}
-                  className="w-100"
+
+                    src={`http://localhost:4000/${course.image}`} alt="Course" className="w-100"
                 />
               </div>
             </div>
@@ -315,28 +314,18 @@ const CourseSingle = () => {
       <div className="comment-box">
         <h4>Add a Comment</h4>
         <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
+          value={commentText}
+          onChange={(e) => setCommentText(e.target.value)}
           placeholder="Type your comment here..."
           rows={4}
           cols={50}
         ></textarea>
         <button onClick={handleSubmitComment}>Submit Comment</button>
       </div>
-      {/* Display existing comments */}
-      <div className="existing-comments">
-  <h4>Comments</h4>
-  <ul>
-    {comments.map((c, index) => (
-      <li key={index}>
-        <p><strong>Comment:</strong> {c.comment}</p>
-        <p><strong>Rating:</strong> {c.rating}</p>
-        <p><strong>User:</strong> {c.username}</p>
-        <p><strong>Time:</strong> {new Date(c.createdAt).toLocaleString()}</p>
-      </li>
-    ))}
-  </ul>
-</div>
+      {/* Comment List */}
+      <CommentComponent comments={comments} />
+
+
 
 
 
