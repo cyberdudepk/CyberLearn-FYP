@@ -5,6 +5,7 @@ import { getUserInterest } from '../controllers/userInterestController.js';
 const router = express.Router();
 
 router.post('/', addUserInterest);
-router.get('/:id' , getUserInterest)
+router.get('/:username', getUserInterest);
+
 
 export default router;

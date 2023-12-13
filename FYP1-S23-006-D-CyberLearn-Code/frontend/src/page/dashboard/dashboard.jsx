@@ -37,7 +37,7 @@ const Dashboard = () => {
         </div>
     
 
-    <Footer />
+    {/* <Footer /> */}
 </Fragment>
   );
 };

@@ -74,6 +74,9 @@ const HeaderFour = () => {
                       <li>
                         <NavLink to="/my-courses">My Courses</NavLink>
                       </li>
+                      <li>
+                        <NavLink to="/dashboard">Dashboard</NavLink>
+                      </li>
                     </ul>
                   </div>
 

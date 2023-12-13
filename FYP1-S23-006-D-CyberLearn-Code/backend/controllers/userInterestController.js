@@ -14,11 +14,12 @@ export const addUserInterest = async (req, res) => {
 
 export const getUserInterest = async (req, res) => {
   try {
-    const { username } = req.body;
+    const { username } = req.params; // Use req.params instead of req.param
 
+    console.log(username);
     // Use findOne to get a single document that matches the username
     const userInterest = await UserInterest.findOne({ username: username });
-
+    console.log(userInterest);
     // Check if userInterest was found
     if (userInterest) {
       res.status(200).json(userInterest);
@@ -29,5 +30,6 @@ export const getUserInterest = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
