@@ -35,8 +35,23 @@ const CourseSingle = () => {
       } catch (error) {
         console.error(error);
       }
+    
     };
+
+    // Fetch comments
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/api/comments/${id}`);
+        setComments(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
+
     fetchData();
+    fetchComments();
     checkEnrollment(); // Call the checkEnrollment function on component mount
   }, [id]);
 
@@ -102,25 +117,31 @@ const CourseSingle = () => {
   };
 
   const handleSubmitComment = async () => {
+    const username = localStorage.getItem("username"); // Replace with dynamic username retrieval logic
     const commentData = {
-      username: "Ahmad", // Replace with dynamic username retrieval logic
-      comment: comment,
+      username,
+      comment,
       courseId: id,
     };
 
     try {
-      const response = await axios.post(
+      // Post the comment to your AI server for processing
+      const aiResponse = await axios.post(
         "http://localhost:5000/process_comment",
         commentData
       );
 
-      if (response.data && response.data.rating !== undefined) {
-        const rating = response.data.rating;
-        console.log("Rating:", rating);
+      if (aiResponse.data && aiResponse.data.rating !== undefined) {
+        const rating = aiResponse.data.rating;
+
+        // Post the comment along with its rating to your backend for storage
+        const backendResponse = await axios.post(
+          'http://localhost:4000/api/comments',
+          { ...commentData, rating }
+        );
 
         // Update your comments state appropriately
-        // For example, if you want to add the new comment to the list
-        setComments([...comments, { comment: comment, rating: rating }]);
+        setComments([...comments, backendResponse.data]);
         setComment("");
 
         Swal.fire({
@@ -131,7 +152,6 @@ const CourseSingle = () => {
           confirmButtonText: "OK",
         });
       } else {
-        // Handle the scenario where rating is not present in the response
         Swal.fire({
           title: "Error",
           text: "Received an unexpected response from the server.",
@@ -291,10 +311,8 @@ const CourseSingle = () => {
 
       {/* Your existing JSX */}
 
-      <Comment />
-
       {/* Comment box */}
-      {/* <div className="comment-box">
+      <div className="comment-box">
         <h4>Add a Comment</h4>
         <textarea
           value={comment}
@@ -305,15 +323,22 @@ const CourseSingle = () => {
         ></textarea>
         <button onClick={handleSubmitComment}>Submit Comment</button>
       </div>
-      {/* Display existing comments 
+      {/* Display existing comments */}
       <div className="existing-comments">
-        <h4>Comments</h4>
-        <ul>
-          {comments.map((c, index) => (
-            <li key={index}>{c.comment}</li>
-          ))}
-        </ul>
-      </div> */}
+  <h4>Comments</h4>
+  <ul>
+    {comments.map((c, index) => (
+      <li key={index}>
+        <p><strong>Comment:</strong> {c.comment}</p>
+        <p><strong>Rating:</strong> {c.rating}</p>
+        <p><strong>User:</strong> {c.username}</p>
+        <p><strong>Time:</strong> {new Date(c.createdAt).toLocaleString()}</p>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
 
       <Footer />
     </Fragment>

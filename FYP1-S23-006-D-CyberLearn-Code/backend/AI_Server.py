@@ -33,6 +33,8 @@ def process_comment():
     comment = data.get('comment')
     courseId = data.get('courseId')
 
+    print("This is received from front-end : ",username , comment, courseId )
+
     # Tokenize the review
     tokenized_review = tokenizer(comment, padding="max_length", truncation=True, max_length=128, return_tensors="pt")
 
