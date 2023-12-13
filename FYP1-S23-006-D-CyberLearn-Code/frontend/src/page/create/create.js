@@ -58,43 +58,7 @@ const Create = () => {
   const handleLevelChange = (event) => setLevel(event.target.value);
   const handleCategoryChange = (event) => setCategory(event.target.value);
 
-  async function ConnectWindows() {
-    try {
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-        const username = "dasd";
-        const body = JSON.stringify({ username });
-        const res = await axios.post("http://localhost:4000/users/connectvm", body, config);
-        // Process the response here
-        console.log(res.data); // Example: log the response data to the console
-    } catch (error) {
-        // Handle any errors that occurred during the request
-        console.error(error);
-    }
-}
-
-async function ConnectKali() {
-  try {
-      const config = {
-          headers: {
-              "Content-Type": "application/json",
-          },
-      };
-      const username = "dasd";
-      const body = JSON.stringify({ username });
-      const res = await axios.post("http://localhost:4000/users/connectkalivm", body, config);
-      // Process the response here
-      console.log(res.data); // Example: log the response data to the console
-  } catch (error) {
-      // Handle any errors that occurred during the request
-      console.error(error);
-  }
-}
-
-
+  
   const [sections, setSections] = useState([]);
 
   const handleEditClick = (index) => {
@@ -484,21 +448,6 @@ async function ConnectKali() {
                             <h6 className="title">Lecture: {lecture.title}</h6>
  
                             <div className="button-group">
-
-                            <button
-                                type="button"
-                                className="btn btn-secondary"
-                                onClick={() => ConnectWindows()}
-                              >
-                                Windows 10 VM
-                              </button>
-                              <button
-                                type="button"
-                                className="btn btn-secondary"
-                                onClick={() => ConnectKali()}
-                              >
-                                Kali Linux VM
-                              </button>
                               
                             <button
                                 type="button"
