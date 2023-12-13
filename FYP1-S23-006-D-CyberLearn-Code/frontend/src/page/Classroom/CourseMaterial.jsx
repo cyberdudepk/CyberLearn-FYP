@@ -19,10 +19,11 @@ const DashboardWithSidebar = () => {
           `http://localhost:4000/courses/course-content/${courseId}`
         );
         const course = await response.json();
+        console.log(course.name)
         if (course && course.sections) {
           setSections(course.sections);
           setSelectedSection(course.sections[0]); // Set the first section as active by default
-          setCourseTitle(course.title); // Assuming course title is part of the course object
+          setCourseTitle(course.name); // Assuming course title is part of the course object
         }
       } catch (error) {
         console.error("Error fetching course content:", error);
