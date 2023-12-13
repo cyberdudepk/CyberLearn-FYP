@@ -139,6 +139,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get('/recommended', async (req, res) => {
+  try {
+    const courses = await Course.find({});
+    const coursesWithLectureCount = courses.map(course => {
+      const totalLectures = course.sections.reduce((total, section) => total + section.lectures.length, 0);
+      return {
+        _id: course._id,
+        name: course.name,
+        image: course.image,
+        category: course.category,
+        tags: course.tags,
+        instructor: course.instructor,
+        level: course.level,
+        totalLectures: totalLectures
+      };
+    });
+    res.json(coursesWithLectureCount);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.get("/load-lecture", async (req, res) => {
   const sectionIndex = req.query.sectionIndex;
   const lectureIndex = req.query.lectureIndex;
@@ -451,25 +473,6 @@ router.get('/course-content/:id', async (req, res) => {
 });
 
 
-router.get('/recommended', async (req, res) => {
-  try {
-    const courses = await Course.find({});
-    const coursesWithLectureCount = courses.map(course => {
-      const totalLectures = course.sections.reduce((total, section) => total + section.lectures.length, 0);
-      return {
-        _id: course._id,
-        name: course.name,
-        image: course.image,
-        category: course.category,
-        instructor: course.instructor,
-        level: course.level,
-        totalLectures: totalLectures
-      };
-    });
-    res.json(coursesWithLectureCount);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+
 
 export default router;
