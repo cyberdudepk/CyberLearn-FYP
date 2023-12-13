@@ -314,7 +314,6 @@ const CourseSingle = () => {
       </div> 
 
 
-    <Comment />
 
       <Footer />
     </Fragment>
