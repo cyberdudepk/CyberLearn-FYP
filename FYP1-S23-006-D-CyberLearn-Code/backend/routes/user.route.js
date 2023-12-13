@@ -10,5 +10,6 @@ router.post('/connectvm', userRoutes.ConnectWindows);
 router.post('/connectkalivm', userRoutes.ConnectKali);
 router.get('/isEnrolled', userRoutes.isEnrolled);
 router.get('/getEnrolledCourses', userRoutes.getEnrolledCourses);
+router.post('/unenroll', userRoutes.unenroll);
 
 export default router;

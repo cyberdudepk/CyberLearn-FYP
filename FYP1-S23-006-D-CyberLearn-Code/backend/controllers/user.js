@@ -86,6 +86,41 @@ const login = async (req, res) => {
   }
 };
 
+// POST /user/unenroll - Unenroll user from a course
+const unenroll = async (req, res) => {
+  const { username, course_id } = req.body;
+
+  try {
+    // Find the user in the database
+    const user = await User.findOne({ username: username });
+
+    if (!user) {
+      return res.status(404).json({ message: `User ${username} not found.` });
+    }
+
+    // Remove the course ID from the user's enrolled_courses array
+    const index = user.enrolled_courses.indexOf(course_id);
+    if (index > -1) {
+      user.enrolled_courses.splice(index, 1);
+    } else {
+      return res.status(404).json({ message: `Course ${course_id} not found in user's enrolled courses.` });
+    }
+
+    // Save the updated user information to the database
+    await user.save();
+
+    res
+      .status(200)
+      .json({
+        message: `Course ${course_id} removed from enrolled courses for user ${username}.`,
+      });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
+
 const getEnrolledCourses = async (req, res) => {
   const { username } = req.query;
 
@@ -229,4 +264,5 @@ export default {
   ConnectKali,
   isEnrolled,
   getEnrolledCourses,
+  unenroll,
 };

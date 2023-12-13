@@ -1,6 +1,7 @@
 import { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 import "./Enrolled.css"
 
@@ -31,10 +32,58 @@ const Enrolled = ({ onSelectCourse }) => {
     }, []);
 
 
-    const handleDelete = async (id) => {
-        // Delete logic here
+    const handleUnroll = async (courseId) => {
+        const apiEndpoint = 'http://localhost:4000/users/unenroll'; // Replace with your actual API endpoint
+    
+        // Retrieve username from localStorage
+        const username = localStorage.getItem('username');
+        if (!username) {
+            console.error('No username found in localStorage');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'No username found. Please log in again.',
+            });
+            return;
+        }
+    
+        try {
+            const response = await axios.post(apiEndpoint, {
+                username: username,
+                course_id: courseId
+            });
+    
+            if (response.status === 200) {
+                console.log('Unenrollment successful');
+                // Show success popup
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Unenrolled!',
+                    text: 'You have been successfully unrolled!',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    // Refresh the page
+                    window.location.reload();
+                });
+            } else {
+                console.error('Unenrollment failed:', response.data.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Unenrollment failed',
+                    text: response.data.message,
+                });
+            }
+        } catch (error) {
+            console.error('Error during unenrollment:', error.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'There was an error unenrolling from the course.',
+            });
+        }
     };
-
+    
 
 
     const subTitle = "Enrolled Courses";
@@ -81,8 +130,8 @@ const Enrolled = ({ onSelectCourse }) => {
                                             </div>
                                         </div>
                                         <div className="course-links">
-                                        <Link to="#">Edit</Link>
-                                            <Link to="" onClick={() => handleDelete(val._id)}>Delete</Link>
+                                        <Link to={`/classroom/${val._id}`}>Open In Classroom</Link>
+                                            <Link to="" onClick={() => handleUnroll(val._id)}>Unroll</Link>
                                         </div>
                                     </div>
                                 </div>

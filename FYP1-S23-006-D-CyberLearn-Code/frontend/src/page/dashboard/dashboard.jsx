@@ -6,8 +6,7 @@ import Sidebar from './Sidebar/Sidebar';
 
 import YourComponent2 from './Enrolled/Enrolled';
 import YourComponent1 from './Recommend/recommended';
-import YourComponent3 from '../../component/sidebar/author';
-import YourComponent4 from '../../component/sidebar/author';
+
 
 const Dashboard = () => {
     const [activeComponent, setActiveComponent] = useState('component1');
@@ -15,8 +14,7 @@ const Dashboard = () => {
   const components = {
     component1: <YourComponent1 />,
     component2: <YourComponent2 />,
-    component3: <YourComponent3 />,
-    component4: <YourComponent4 />,
+
   };
 
   const handleMenuItemClick = (componentKey) => {

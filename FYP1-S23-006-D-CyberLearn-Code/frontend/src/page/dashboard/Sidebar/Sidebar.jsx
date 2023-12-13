@@ -6,9 +6,6 @@ const Sidebar = ({ onMenuItemClick, activeComponent }) => {
   const menuItems = [
     { name: "Academy Overview", componentKey: "component1" },
     { name: "Enrolled Courses", componentKey: "component2" },
-    { name: "Component 3", componentKey: "component3" },
-    { name: "Component 4", componentKey: "component4" },
-    { name: "Component 5", componentKey: "component4" },
 
   ];
 
