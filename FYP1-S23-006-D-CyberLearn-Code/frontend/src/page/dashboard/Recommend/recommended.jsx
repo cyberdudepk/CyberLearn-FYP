@@ -24,6 +24,7 @@ const Enrolled = ({ onSelectCourse }) => {
 
                 const interestResponse = await fetch(`http://localhost:4000/api/user-interests/${username}`);
                 const interestData = await interestResponse.json();
+                console.log(interestData)
                 setUserTags(interestData.tags);
 
                 const response = await fetch('http://localhost:4000/courses/recommended');
@@ -35,7 +36,7 @@ const Enrolled = ({ onSelectCourse }) => {
                 const matchedCourses = data.filter(course => 
                     course.tags.some(tag => interestData.tags.includes(tag)));
 
-                    console.log(matchedCourses);
+                    console.log(matchedCourses)
 
 
 
