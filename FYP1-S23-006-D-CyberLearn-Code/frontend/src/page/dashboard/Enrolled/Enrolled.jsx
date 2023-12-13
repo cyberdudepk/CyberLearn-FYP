@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import CourseContent from '../CourseMaterial/CourseMaterial';
+
 
 import "./Enrolled.css"
 

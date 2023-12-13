@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import Footer from "../../component/layout/footer";
-import Header from "../../component/layout/header";
+
 
 import Sidebar from './Sidebar/Sidebar';
 

@@ -439,6 +439,7 @@ router.get('/course-content/:id', async (req, res) => {
   try {
     const course = await Course.findById(req.params.id);
     if (!course) {
+      console("Course not found")
       return res.status(404).json({ message: "Course not found" });
     }
     console.log("Sending course content", course)

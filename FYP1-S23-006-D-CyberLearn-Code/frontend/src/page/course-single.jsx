@@ -194,7 +194,7 @@ const CourseSingle = () => {
                 <div className="course-enroll">
                   {isEnrolled ? (
                     <button className="lab-btn">
-                      <span>Open In Academy</span>
+                      <Link to={`/classroom/${id}`}><span>Open In Academy</span></Link>
                     </button>
                   ) : (
                     <button onClick={() => handleEnroll()} className="lab-btn">
