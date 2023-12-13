@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
   try {
-    // Extract token from request headers
+    // Extract token from request header
     const token = req.headers.authorization.split(' ')[1];
 
     // Verify token and decode payload
