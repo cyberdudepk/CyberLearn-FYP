@@ -9,7 +9,7 @@ const Enrolled = ({ onSelectCourse }) => {
 
     useEffect(() => {
         async function fetchEnrolledCourses() {
-            const username = localStorage.getItem("username");
+            const username = localStorage.getItem("username");3
             if (!username) {
                 console.log("No username found");
                 return;
