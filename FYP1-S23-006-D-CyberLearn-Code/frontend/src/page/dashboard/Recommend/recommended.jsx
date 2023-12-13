@@ -22,23 +22,23 @@ const Enrolled = ({ onSelectCourse }) => {
             
             try {
 
-                const interestResponse = await fetch(`http://localhost:4000/api/user-interests/${username}`);
-                const interestData = await interestResponse.json();
-                console.log(interestData);
-                setUserTags(interestData.tags);
 
                 const response = await fetch('http://localhost:4000/courses/recommended');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-
                 console.log(data)
 
-                const matchedCourses = data.filter(course => 
-                    course.tags.some(tag => interestData.tags.includes(tag)));
+                const interestResponse = await fetch(`http://localhost:4000/api/user-interests/${username}`);
+                const interestData = await interestResponse.json();
+                console.log(interestData);
+                setUserTags(interestData.tags);
 
-                    console.log(matchedCourses)
+                // const matchedCourses = data.filter(course => 
+                //     course.tags.some(tag => interestData.tags.includes(tag)));
+
+                //     console.log(matchedCourses);
 
 
 
