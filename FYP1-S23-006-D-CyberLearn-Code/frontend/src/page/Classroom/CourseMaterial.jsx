@@ -35,12 +35,10 @@ const DashboardWithSidebar = () => {
 
   const [expandedLectures, setExpandedLectures] = useState({});
 
-  
-
   const toggleLecture = (index) => {
-    setExpandedLectures(prev => ({
+    setExpandedLectures((prev) => ({
       ...prev,
-      [index]: !prev[index]
+      [index]: !prev[index],
     }));
   };
 
@@ -50,16 +48,18 @@ const DashboardWithSidebar = () => {
         <div style={{ display: "flex" }}>
           <div className="sidebar">
             <div className="sidebar-logo">
-              {/* Assuming you have a logo image, adjust the path as necessary */}
-              <img
-                src="http://localhost:3000/assets/images/logo/green.png"
-                alt="Logo"
-                className="logo-image"
-              />
+              <Link to="/">
+                <img
+                  src="http://localhost:3000/assets/images/logo/green.png"
+                  alt="Logo"
+                  className="logo-image"
+                />
+              </Link>
             </div>
 
             <div className="course-title">
               <h2>{courseTitle}</h2>
+              <div className="animated-divider"></div>
             </div>
 
             {/* Sidebar menu items */}
@@ -74,19 +74,24 @@ const DashboardWithSidebar = () => {
                 {section.title}
               </div>
             ))}
+
+            <div className="back-to-dashboard">
+              <Link to="/dashboard">Back to Dashboard</Link>
+            </div>
           </div>
 
           <div style={{ marginLeft: "30%", width: "70%" }}>
             {selectedSection && (
               <div className="main-div">
                 <h2>{selectedSection.title}</h2>
+                <div className="fancy-divider"></div>
                 {selectedSection.lectures.map((lecture, index) => (
                   <div key={index}>
                     <div className="main-heading">
+                      <h3>{lecture.title}</h3>
                       <p onClick={() => toggleLecture(index)}>
                         {expandedLectures[index] ? "➖" : "➕"}
                       </p>
-                      <h3>{lecture.title}</h3>
                     </div>
                     {expandedLectures[index] && (
                       <div

@@ -1,14 +1,13 @@
 .sidebar {
-    width: 25%;
-    height: 100vh;
-    position: fixed;
-    text-align: center;
-    background-color: white;
-    padding: 20px;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Adding drop shadow */
-
+  width: 25%;
+  height: 100vh;
+  position: fixed;
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Adding drop shadow */
 }
 
 .sidebar-logo {
@@ -22,12 +21,10 @@
   height: auto;
 }
 
-
 .sidebar-header {
   margin-top: 15px;
   text-align: center; /* Center content */
   padding-bottom: 20px; /* Spacing below the header */
-
 }
 
 .user-avatar {
@@ -43,136 +40,143 @@
 }
 
 .menu-item {
-    padding: 10px;
-    margin: 10px 0;
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    border-bottom: 1px solid #f0f0f0; /* Thin line for separation */
+  padding: 10px;
+  margin: 10px 0;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-bottom: 1px solid #f0f0f0; /* Thin line for separation */
 }
 
 .menu-item:last-child {
-    border-bottom: none; /* No border for the last item */
+  border-bottom: none; /* No border for the last item */
 }
-  
-  .menu-item:hover, .menu-item.active{
-    background-color: #26C976;
-    color: white;
-  }
-  
+
+.menu-item:hover,
+.menu-item.active {
+  background-color: #26c976;
+  color: white;
+}
+
+.main-div {
+  width: 93%;
+  min-height: 100vh;
+  padding: 50px;
+  background-color: #FFF9F1;
+
+}
+
+.fancy-divider {
+  height: 4px;
+  width: 50%; /* Adjust the width as needed */
+  background: linear-gradient(to right, #76b852 0%, #ffcc00 50%, #ff9800 100%);
+  margin: 20px auto; /* Centers the divider and adds some space around it */
+  border-radius: 2px;
+}
 
 
-  .main-div {
+.main-div h2 {
+  text-align: center;
+  color: #000;
+  font-size: 35px;
+}
 
-    width: 50vw;
+
+.main-heading {
+  display: flex;
+  justify-content: space-between; /* Aligns children at start and end */
+  align-items: center; /* Centers children vertically */
+  margin-top: 30px;
+  padding: 5px 0 0px 20px;
+  background: #26c976;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+}
+
+
+
+.main-heading h3 {
+  margin-left: 30px;
+  color: #000;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.main-heading p {
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: rgba(174, 174, 233, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+  background: #fff;
+  padding: 7px;
+  margin-right: 25px;
+  margin-top: 5px;
   
-    padding: 50px;
-  
-    background-color: rgb(255, 255, 255);
-  
-    border-radius: 10px;
-  
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-  
-      rgba(17, 17, 26, 0.1) 0px 8px 8px;
-  
-  }
-  
-  
-  
-  h1 {
-  
-    text-align: center;
-  
-    font-family: "Bitter", serif;
-  
-    text-transform: capitalize;
-  
-    font-size: 32px;
-  
-    letter-spacing: 5;
-  
-    word-spacing: 5px;
-  
-    margin-bottom: 50px;
-  
-    color: #2c3148;
-  
-  }
-  
-  
-  
-  .main-heading {
-  
-    display: flex;
-  
-    margin-top: 30px;
-  
-    padding: 20px 0 20px 20px;
-  
-    background: #f1f4ff;
-  
-    border-radius: 5px;
-  
-    box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
-  
-  }
-  
-  
-  
-  .main-heading h3 {
-  
-    margin-left: 30px;
-  
-    font-family: "Mate SC", serif;
-  
-    color: #303243;
-  
-    font-family: "Raleway", sans-serif;
-  
-    word-spacing: 1px;
-  
-    letter-spacing: 1px;
-  
-    font-weight: 600;
-  
-    font-size: 18px;
-  
-  }
-  
-  .main-heading p {
-  
-    cursor: pointer;
-  
-    border-radius: 50%;
-  
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
-  
-      rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-  
-    background: #fff;
-  
-    padding: 7px;
-  
-  }
-  
-  .answers {
-  
-    padding: 30px 20px 40px 20px;
-  
-    font-family: "Raleway", sans-serif;
-  
-    font-size: 15px;
-  
-    word-spacing: 2px;
-  
-    font-weight: 400;
-  
-    line-height: 1.7;
-  
-    background: #fcf5f5;
-  
-    color: rgb(40, 37, 53);
-  
-  }
+}
+
+.answers {
+  padding: 30px 20px 40px 20px;
+  font-family: "Raleway", sans-serif;
+  font-size: 15px;
+  word-spacing: 2px;
+  font-weight: 400;
+  line-height: 1.7;
+  background: #fff;
+  color: rgb(40, 37, 53);
+}
+
+.animated-divider {
+  height: 3px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  background-size: 200% 100%;
+  background-image: linear-gradient(to right, #76b852, #ffcc00, #ff9800, #ffcc00, #76b852);
+  animation: shiftColor 3s linear infinite;
+}
+
+@keyframes shiftColor {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+.course-title h2 {
+  color: #303243; /* Dark gray color for better contrast */
+  font-family: 'Raleway', sans-serif; /* Modern, readable font */
+  font-size: 28px; /* Slightly larger size for prominence */
+  font-weight: 600; /* Medium weight for readability */
+  text-align: center; /* Center alignment for prominence */
+  margin: 20px 0; /* Add some space around the title */
+  padding: 10px; /* Additional padding for visual space */
+  background-color: #FFF9F1; /* Light background for soft contrast */
+  border-radius: 8px; /* Rounded corners for a smoother look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  width: fit-content; /* Adjust width to content */
+  margin-left: auto; /* Center the element horizontally */
+  margin-right: auto; /* Center the element horizontally */
+}
+
+
+
+.back-to-dashboard {
+  position: absolute; /* Position the button absolutely within the sidebar */
+  bottom: 10px; /* Distance from the bottom of the sidebar */
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.back-to-dashboard a {
+  display: inline-block;
+  padding: 8px 15px;
+  border-radius: 5px;
+  text-decoration: none; /* Removes underline from link */
+  font-weight: bold;
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
