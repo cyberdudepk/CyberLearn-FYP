@@ -23,6 +23,7 @@ const Enrolled = ({ onSelectCourse }) => {
                 const data = await response.json();
                 console.log(data)
                 setCourseList(data);
+                console.log(data.tags)
             } catch (error) {
                 console.error("Error fetching enrolled courses: ", error);
             }
