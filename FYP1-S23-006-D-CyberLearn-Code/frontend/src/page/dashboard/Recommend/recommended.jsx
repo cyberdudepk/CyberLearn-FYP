@@ -16,11 +16,12 @@ const Enrolled = ({ onSelectCourse }) => {
             }
             
             try {
-                const response = await fetch('http://localhost:4000/courses/');
+                const response = await fetch('http://localhost:4000/courses/recommended');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
+                console.log(data)
                 setCourseList(data);
                 console.log(data.tags)
             } catch (error) {
