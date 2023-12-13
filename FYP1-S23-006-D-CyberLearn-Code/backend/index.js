@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import userRouter from './routes/user.route.js';
 import commentRouter from './routes/comment.route.js';
 import courseRouter from './controllers/course.js';
+import userInterestRouter from './routes/userInterest.route.js';
 import path from 'path';
 import cors from 'cors';
 
@@ -41,6 +42,7 @@ app.use(express.json())
 app.use("/users", userRouter)
 app.use("/courses", courseRouter)
 app.use("/api", commentRouter); // Add this line
+app.use('/api/user-interests', userInterestRouter);
 
 app.get('/uploads/:fileName', (req, res) => {
   const fileName = req.params.fileName;
